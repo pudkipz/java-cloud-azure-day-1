@@ -9,7 +9,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table(name = "artists")
+@Table(name = "artists", uniqueConstraints = {@UniqueConstraint(columnNames = "name")})
 public class Artist {
 
     @Id

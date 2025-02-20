@@ -10,7 +10,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table(name = "albums")
+@Table(name = "albums", uniqueConstraints = {@UniqueConstraint(columnNames = "title")})
 public class Album {
 
     @Id
