@@ -28,9 +28,10 @@ public class Song {
     @JsonIncludeProperties("name")
     private Artist artist;
 
-    public Song(String title, Album album) {
+    public Song(String title, Album album, Artist artist) {
         this.title = title;
         this.album = album;
+        this.artist = artist;
     }
 
     public Song(int id, String title, Album album) {
@@ -39,4 +40,10 @@ public class Song {
         this.album = album;
     }
 
+    public Song(int id) {
+        this.id = id;
+    }
+
+    public Song() {
+    }
 }

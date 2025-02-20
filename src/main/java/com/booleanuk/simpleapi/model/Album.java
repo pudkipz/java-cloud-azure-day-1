@@ -20,23 +20,30 @@ public class Album {
     @Column(name = "title")
     private String title;
 
-    @OneToMany(mappedBy = "song")
+    @OneToMany(mappedBy = "album")
     private List<Song> songs;
 
     @ManyToOne
-    @JoinColumn(name = "artist_id")
+//    @JoinColumn(name = "artist_id")
     @JsonIncludeProperties("name")
     private Artist artist;
 
-    public Album(int id, String title, List<Song> songs) {
+    public Album(int id, String title, List<Song> songs, Artist artist) {
         this.id = id;
         this.title = title;
         this.songs = songs;
+        this.artist = artist;
     }
 
-    public Album(String title, List<Song> songs) {
+    public Album(String title, Artist artist) {
         this.title = title;
-        this.songs = songs;
+        this.artist = artist;
     }
 
+    public Album(int id) {
+        this.id = id;
+    }
+
+    public Album() {
+    }
 }

@@ -19,9 +19,33 @@ public class Artist {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "song")
+    @OneToMany(mappedBy = "artist")
     private List<Song> songs;
 
-    @OneToMany(mappedBy = "album")
+    @OneToMany(mappedBy = "artist")
     private List<Album> albums;
+
+    public Artist(int id, String name, List<Song> songs, List<Album> albums) {
+        this.id = id;
+        this.name = name;
+        this.songs = songs;
+        this.albums = albums;
+    }
+
+    public Artist(String name, List<Song> songs, List<Album> albums) {
+        this.name = name;
+        this.songs = songs;
+        this.albums = albums;
+    }
+
+    public Artist(String name) {
+        this.name = name;
+    }
+
+    public Artist(int id) {
+        this.id = id;
+    }
+
+    public Artist() {
+    }
 }
