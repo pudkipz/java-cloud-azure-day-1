@@ -21,6 +21,8 @@ public class ArtistController {
 
     @PostMapping
     public Artist createArtist(@RequestBody Artist artist) {
-        return this.artistRepository.save(artist);
+        Artist a = this.artistRepository.save(artist);
+        System.out.println(a);
+        return a;
     }
 }
