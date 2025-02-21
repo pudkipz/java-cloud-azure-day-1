@@ -39,12 +39,37 @@ public class PlaylistController {
         return playlist;
     }
 
-    @PutMapping("/{id}/remove")
-    public Playlist removeSong(@PathVariable int playlistId, @RequestBody Song song) {
+    @PutMapping("/{id}/addsongs")
+    public Playlist addSongs(@PathVariable(name = "id") int playlistId, @RequestBody List<Song> songs) {
+        // TODO: Error handling for non-existent song
         Playlist playlist = this.playlistRepository.findById(playlistId).orElse(null);
         if (playlist == null) return null;
-        if (!playlist.getSongs().contains(song)) return null;
-        playlist.getSongs().removeIf(s -> s.getId() == song.getId());
+        playlist.getSongs().addAll(songs);
+        this.playlistRepository.save(playlist);
+        return playlist;
+    }
+
+//    @PutMapping("/{id}/remove")
+//    public Playlist removeSong(@PathVariable int playlistId, @RequestBody Song song) {
+//        Playlist playlist = this.playlistRepository.findById(playlistId).orElse(null);
+//        if (playlist == null) return null;
+//        if (!playlist.getSongs().contains(song)) return null;
+//        playlist.getSongs().removeIf(s -> s.getId() == song.getId());
+//        this.playlistRepository.save(playlist);
+//        return playlist;
+//    }
+
+    @PutMapping("/{id}/remove")
+    public Playlist removeSong(@PathVariable(name = "id") int playlistId, @RequestBody List<Integer> songIndices) {
+        Playlist playlist = this.playlistRepository.findById(playlistId).orElse(null);
+        if (playlist == null) return null;
+        for (int i : songIndices) {
+            if (i >= playlist.getSongs().size()) {
+                return null;
+            }
+            playlist.getSongs().remove(i);
+        }
+
         this.playlistRepository.save(playlist);
         return playlist;
     }
